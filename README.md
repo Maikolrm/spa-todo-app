@@ -1,6 +1,6 @@
 # FullStack JavaScript aplication ( todo app )
 
-### Here some feauture of my app :
+### Here some feature of my app :
 
 1. Create account
 
@@ -35,9 +35,7 @@
 + Loaders
   
 + Snackbars
-  
-8. Sending email on register user
 
-9. Responsive view
+8. Responsive view
 
 ### You wanna try it : [click here](https://spa-todo-app.herokuapp.com/)
