@@ -1,0 +1,16 @@
+/*
+	colors
+*/
+:root {
+	--bg-color: #eaeaea;
+	--white: #fff;
+	--grey: #ececed;
+	--pink: #ff7a7a;
+	--green: #26d0a9;
+	--blue: #0aa6ff;
+	--purple: #2d3049;
+	--mid-purple: #2a2c41;
+	--dark-purple: #1b1f31;
+	--task-icon-color: #2f3146;
+	--unique-color: #818ba1;
+}

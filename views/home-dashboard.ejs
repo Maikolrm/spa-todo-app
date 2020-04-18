@@ -1,0 +1,33 @@
+<%- include('./includes/header') %>
+<!-- loading banner -->
+<div class="content__modal content__modal--loading-banner">
+	<div class="modal__content">
+		<span class="loading-banner__icon"></span>
+		<!-- <h2 class="loading-banner__heading">Loading.....</h2> -->
+	</div>
+</div>
+<!-- loading banner -->
+<header class="dashboard__header">
+	<h1>To Do</h1>
+	<span class="header__calendar far fa-calendar-alt" title="Today"></span>
+</header>
+<!-- content -->
+<div class="dashboard__content">
+	<%- include('./includes/profile') %>
+	<%- include('./includes/create-task') %>
+	<!-- task container -->
+	<div id="user-tasks" class="content__modal">
+		<div class="modal__content modal__content--none-tasks"><i class='fas fa-tasks'></i></div>
+	</div>
+	<!-- /task container -->
+</div>
+<!-- content -->
+<!-- dashboard footer -->
+<footer class="dashboard__footer">
+	<button data-id="user-tasks" class="footer__tab fas fa-home selected" title="Home"></button>
+	<button data-id="create-task" class="footer__tab fas fa-plus-circle" title="Create task"></button>
+	<button data-id="profile" class="footer__tab fas fa-user" title="Profile"></button>
+</footer>
+<!-- /dashboard footer -->
+<%- include('./includes/snackbar') %>
+<%- include('./includes/footer') %>

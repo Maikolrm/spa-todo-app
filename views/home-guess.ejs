@@ -1,0 +1,89 @@
+<%- include('./includes/header') %>
+<%- include('includes/snackbar') %>
+<!-- content register form -->
+<form id="register-form" class="content__register-form" autocomplete="off">
+	<span class="register-form__close-btn fas fa-times-circle" title="Close"></span>
+	<!-- content -->
+	<div class="register-form__content">
+		<h2 class="form__heading">sign up</h2>
+		<!-- form row -->
+		<div class="form__row">
+			<div class="field__alert"></div>
+			<input class="form__field" name="name" placeholder="name">
+			<span class="form__icon fas fa-user"></span>
+		</div>
+		<!-- /form row -->
+		<!-- form row -->
+		<div class="form__row">
+			<div class="field__alert"></div>
+			<input class="form__field" name="email" placeholder="email">
+			<span class="form__icon fas fa-envelope"></span>
+		</div>
+		<!-- /form row -->
+		<!-- form row -->
+		<div class="form__row">
+			<div class="field__alert"></div>
+			<input type="password" class="form__field" name="password" placeholder="password">
+			<span class="form__icon fas fa-lock"></span>
+			<span class="form__icon form__icon-toggle-pw form__icon--right fas fa-eye" title="Show password"></span>
+		</div>
+		<!-- /form row -->
+		<!-- form row -->
+		<div class="form__row">
+			<button class="form__btn">sign ing</button>
+		</div>
+		<!-- /form row -->
+		<!-- form row -->
+		<div class="form__row form__row--terms-services">
+			<input type="checkbox" name="terms_services">
+			<p class="register-form__terms">Accept our terms and conditions</p>
+		</div>
+		<!-- /form row -->
+		<input type="hidden" name="form" value="register-form" />
+	</div>
+	<!-- /content -->
+</form>
+<!-- /content register form -->
+<!-- content banner -->
+<div class="content__top-section">
+
+	<span class="top-section__create-account-btn fas fa-plus-circle" title="Create account"></span>
+
+	<!-- top section - content -->
+	<div class="top-section__content">
+		<h1>to do</h1>
+		<p>Reminds Everithing</p>
+	</div>
+	<!-- top section - content -->
+
+</div>
+<!-- content banner -->
+<!-- content down section -->
+<div class="content__down-section">
+	<form id="login-form" autocomplete="off">
+		<h2 class="form__heading">sign up</h2>
+		<!-- form row -->
+		<div class="form__row">
+			<div class="field__alert"></div>
+			<input class="form__field" name="email" placeholder="email">
+			<span class="form__icon fas fa-envelope"></span>
+		</div>
+		<!-- /form row -->
+		<!-- form row -->
+		<div class="form__row">
+			<div class="field__alert"></div>
+			<input class="form__field" type="password" name="password" placeholder="password">
+			<span class="form__icon fas fa-lock"></span>
+			<span class="form__icon form__icon--right form__icon-toggle-pw fas fa-eye" title="Show password"></span>
+		</div>
+		<!-- /form row -->
+		<!-- form row -->
+		<div class="form__row">
+			<button class="form__btn">Sign in</button>
+		</div>
+		<!-- /form row -->
+		<input type="hidden" name="form" value="login-form">
+	</form>
+</div>
+<!-- content down section -->
+<%- include('./includes/footer') %>

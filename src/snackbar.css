@@ -1,0 +1,25 @@
+/*
+	snackbar
+*/
+.main__snackbar {
+	display: none;
+	position: absolute;
+	z-index: 1000;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 10px;
+	width: 95%;
+	height: 60px;
+	border-radius: 5px;
+	font: 600 11px 'Montserrat', san-serif;
+	text-transform: uppercase;
+	color: var(--white);
+	text-shadow: 0 1px 1px rgba(0,0,0,.1);
+	text-align: center;
+	letter-spacing: 1px;
+	line-height: 60px
+}
+
+.main__snackbar[data-status='failure'] { background: red }
+
+.main__snackbar[data-status='success'] { background: var(--green) }

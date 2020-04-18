@@ -1,0 +1,35 @@
+/*
+	presets
+*/
+*{
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: none;
+	position: relative;
+	box-sizing: border-box;
+	z-index: auto;
+	outline: none;
+	text-decoration: none;
+	list-style: none
+}
+
+h1, h2, h3, h4, h5, h6, p { line-height: 1 }
+
+a, span { display: inline-block }
+
+img { display: block; width: 100% }
+
+button, a { padding: 0; cursor: pointer }
+
+/*
+	layout class
+*/
+.flex { display: flex }
+
+.flex-1 { flex: 1 }
+
+/*
+	main
+*/
+.main { height: 100vh }

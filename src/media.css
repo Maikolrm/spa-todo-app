@@ -1,0 +1,27 @@
+@media screen and (max-width:900px) {
+	.field__alert {
+		width: auto;
+		left: 0;
+		top: -110%;
+		padding: 0 10px;
+		box-shadow: none;
+		text-align: left
+	}
+
+	.field__alert::before {
+		top: 100%;
+		left: 15px;
+		transform: translate(0, -0.05%);
+		border-color: transparent;
+		border-top-color: red
+	}
+}
+
+@media screen and (max-width:450px) {
+	.main__content { width: 100% }
+}
+
+@media screen and (max-height:750px) {
+	.main { display: block }
+	.main__content { margin: auto; height: 100%; min-height: 700px }
+}
