@@ -1,8 +1,6 @@
 const bcrypt = require('bcryptjs')
 const validator = require('validator')
 const md5 = require('md5')
-const nodemailer = require('nodemailer')
-const dotenv = require('dotenv').config()
 const usersCollection = require('../db').db().collection('users')
 
 let User = function(data) {
@@ -135,45 +133,6 @@ User.prototype.userSelected = function() {
 } // end user selected
 
 /*
-	sen user email
-	========================================================================= */
-
-User.prototype.sendUserEmail = function() {
-	return new Promise(async (resolve, reject) => {
-		try {
-			let transporter = nodemailer.createTransport({
-				service: 'gmail',
-				port: 587,
-				secure: true,
-				auth: {
-					user: process.env.APPLICATIONEMAIL,
-					pass: process.env.APPLICATIONPW
-				}
-			})
-
-			let mailOptions = {
-				from: 'todoapp@info.com',
-				to: this.data.email,
-				subject: 'Thanks for register',
-				html: `
-					<p><strong>Email : <strong>${ this.data.email }</p>
-					<p><strong>Password : <strong>${ this.userpw }</p>
-				`
-			}
-
-			transporter.sendMail(mailOptions, function(err, info) {
-				if (err) {
-					reject()
-				} else {
-					resolve()
-				}
-			})
-
-		} catch { reject() }
-	})
-
-}
-/*
 	register
 	========================================================================= */
 User.prototype.register = function() {
@@ -189,9 +148,8 @@ User.prototype.register = function() {
 					return
 				}
 				delete this.data.form // remove form property from data
-				this.userpw = this.data.password // original user password
 				this.data.password = bcrypt.hashSync(this.data.password, bcrypt.genSaltSync(10)) // hashed user password
-				await Promise.all([usersCollection.insertOne(this.data), this.sendUserEmail()])
+				await usersCollection.insertOne(this.data)
 				resolve({ success: true, status: 'success', msg: 'success register' })
 			} catch { reject() }
 		} else {
