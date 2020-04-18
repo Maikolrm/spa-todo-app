@@ -9,6 +9,7 @@ router.post('/register', userController.register)
 router.post('/validate-email', userController.duplicatedEmail)
 router.post('/login', userController.login)
 router.get('/logout', userController.logout)
+router.get('/404', userController.render_404)
 
 // tasks related routs
 router.post('/create-task', tasksController.create)

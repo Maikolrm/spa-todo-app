@@ -13,7 +13,7 @@ exports.create = function(req, res) {
 	let task = new Task(req.body, req.session.user._id)
 	task.create().then(result => {
 		setTimeout(() => res.json(result), 650)
-	}).catch(e => console.log(e))
+	}).catch(e => res.json(e))
 }
 
 // update task
@@ -21,7 +21,7 @@ exports.update = function(req, res) {
 	let task = new Task(req.body)
 	task.update().then(response => {
 		setTimeout(() => res.json(response), 650)
-	}).catch(e => res.json({ attack: true }))
+	}).catch(e => res.json(e))
 }
 
 // delete user tasks
@@ -29,5 +29,5 @@ exports.delete = function(req, res) {
 	let task = new Task()
 	Task.delete(req.body._id).then(deleted => {
 		setTimeout(() => res.json(deleted), 650)
-	}).catch(e => console.log(e))
+	}).catch(e => res.json(e))
 }

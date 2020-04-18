@@ -23,6 +23,11 @@ $(document).ready(() => {
 	}
 
 	/*
+		render 404 page
+		========================================================================= */
+	function renderServerBrokenResponse() { location.href = '/404' }
+
+	/*
 		toogle password visibility
 		========================================================================= */
 	$('.form__icon-toggle-pw').on('click', function() {
@@ -34,13 +39,9 @@ $(document).ready(() => {
 	})
 
 	// tooltip methods
-	function showTooltip(field) {
-		$(field).prev().fadeIn(50)
-	}
+	function showTooltip(field) { $(field).prev().fadeIn(50) }
 
-	function hideTooltip(field) {
-		$(field).prev().fadeOut(50)
-	}
+	function hideTooltip(field) { $(field).prev().fadeOut(50) }
 
 	/*
 		validate duplicated email
@@ -54,13 +55,12 @@ $(document).ready(() => {
 			},
 			dataType: 'json',
 			success: response => {
-				// console.log(response)
 				if (!response.duplicated) {
 					$(field).removeClass('duplicated')
 					hideTooltip(field)
 				}
 			},
-			error: e => console.log(e)
+			error: e => renderServerBrokenResponse()
 		})
 	}
 
@@ -155,12 +155,16 @@ $(document).ready(() => {
 				$(obj.btn).attr('disabled', 'true')
 			},
 			success: response => manageRegisterResponse(response, obj),
-			error: e => console.log(e)
+			error: e => renderServerBrokenResponse()
 		})
 	})
 
 	// manage register response
 	function manageRegisterResponse(response, form) {
+		if (response.server_broken) {
+			renderServerBrokenResponse()
+			return
+		}
 		if (response.success) {
 			showSnackbar(response, 1000)
 			$(form.btn).html('sign up')
@@ -190,13 +194,16 @@ $(document).ready(() => {
 				$(btn).html('<i class="btn__loader"></i>')
 			},
 			success: response => manageLoginFormResponse(response, btn),
-			error: e => console.log(e)
+			error: e => renderServerBrokenResponse()
 		})
 	})
 
 	// manage login form
 	function manageLoginFormResponse(response, btn) {
-		// console.log(response)
+		if (response.server_broken) {
+			renderServerBrokenResponse()
+			return
+		}
 		if (response.errors) {
 			validateServerResponse(response)
 			$(btn).html('sign in')
@@ -220,7 +227,7 @@ $(document).ready(() => {
 			url: "/get-tasks",
 			dataType: "json",
 			success: response => appendUserTasks(response.tasks),
-			error: e => console.log(e)
+			error: e => renderServerBrokenResponse()
 		})
 
 		/*
@@ -283,19 +290,22 @@ $(document).ready(() => {
 						$(form.btn).html('<i class="btn__loader"></i>')
 				},
 				success: response => manageCreateTaskResponse(response, form),
-				error: (e) => console.log(e)
+				error: e => renderServerBrokenResponse()
 			})
 		})
 
 		// manage create task response
 		function manageCreateTaskResponse(response, form) {
+			if (response.server_broken) {
+				renderServerBrokenResponse()
+				return
+			}
 			if (response.errors) {
 				validateServerResponse(response)
 				$(form.btn).html('create')
 				$(form.btn).removeAttr('disabled')
 				return
-			}
-			if (response.success) {
+			} else {
 				appendUserTasks(response.tasks)
 				showSnackbar(response, 1000)
 				$(form.btn).html('create')
@@ -321,15 +331,14 @@ $(document).ready(() => {
 					$(btn).html('<i class="btn__loader"></i>')
 				},
 				success: response => manageUpdateTaskResponse(response, btn),
-				error: e => console.log(e)
+				error: e => renderServerBrokenResponse()
 			})
 		}
 
 		// manage update task response
 		function manageUpdateTaskResponse(response, btn) {
-			// console.log(response)
-			if (response.attack) {
-				location.href = '/404'
+			if (response.server_broken) {
+				renderServerBrokenResponse()
 				return
 			}
 			if (response.success) {
@@ -365,7 +374,7 @@ $(document).ready(() => {
 					$(btn).html('<i class="btn__loader"></i>')
 				},
 				success: response => removeTaskFromDOM(response),
-				error: e => console.log(e)
+				error: e => renderServerBrokenResponse()
 			})
 		}
 
@@ -380,7 +389,7 @@ $(document).ready(() => {
 						$('.modal__content--none-tasks').fadeIn(10)
 					}
 				})
-			}
+			} else { renderServerBrokenResponse() }
 		}
 
 		/*

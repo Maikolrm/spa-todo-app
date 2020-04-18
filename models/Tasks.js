@@ -65,10 +65,11 @@ Task.prototype.create = function() {
 		if (!this.errors.length) {
 			try {
 				let task = await tasksCollection.insertOne({ description: this.data.description, user: ObjectID(this.userid) })
+				if (!task) { reject({ server_broken: true }); return }
 				task = task.ops[0]
 				delete task.user // remove user from response
 				resolve({ tasks: [task], success: true, status: 'success', msg: 'task created' })
-			} catch { reject() }
+			} catch { reject({ server_broken: true }) }
 		} else {
 			resolve({ form: 'create-task-form', errors: this.errors })
 		}
@@ -85,7 +86,7 @@ Task.prototype.getUserTasks = function () {
 			} else {
 				resolve({ tasks: [] })
 			}
-		} catch { reject() }
+		} catch { reject({ server_broken: true }) }
 	})
 }
 
@@ -98,7 +99,7 @@ Task.prototype.updateDocument = function() {
 				reject()
 				return
 			}
-			let result = await tasksCollection.findOneAndUpdate(
+			await tasksCollection.findOneAndUpdate(
 				{ _id: new ObjectID(this.data._id) },
 				{ $set: { description: this.data.description } }
 			)
@@ -116,7 +117,7 @@ Task.prototype.update = function() {
 			try {
 				await this.updateDocument()
 				resolve({ success: true, status: 'success', msg: 'task update' })
-			} catch { reject() }
+			} catch { reject({ server_broken: true }) }
 		} else {
 			resolve({
 				task: this.data._id,
@@ -130,11 +131,14 @@ Task.prototype.update = function() {
 Task.delete = function(taskid) {
 	return new Promise(async (resolve, reject) => {
 		try {
+			let task = await tasksCollection.findOne({ _id: new ObjectID(taskid) })
+			if (!ObjectID.isValid(taskid) || !task) {
+				reject({ server_broken: true })
+				return
+			}
 			await tasksCollection.deleteOne({ _id: new ObjectID(taskid) })
 			resolve({ _id: taskid, success:true, status: 'success', msg: 'task deleted' })
-		} catch {
-			reject()
-		}
+		} catch { reject({ server_broken: true }) }
 	})
 }
 

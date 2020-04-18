@@ -151,7 +151,7 @@ User.prototype.register = function() {
 				this.data.password = bcrypt.hashSync(this.data.password, bcrypt.genSaltSync(10)) // hashed user password
 				await usersCollection.insertOne(this.data)
 				resolve({ success: true, status: 'success', msg: 'success register' })
-			} catch { reject() }
+			} catch { reject({ server_broken: true }) }
 		} else {
 			resolve({ form: this.data.form, errors: this.errors })
 		}
@@ -180,7 +180,7 @@ User.prototype.login = function() {
 					this.errors.push({ field: 'password', class: 'invalid', msg: 'incorect password' })
 					resolve({ form: this.data.form, errors: this.errors })
 				}
-			} catch { reject() }
+			} catch { reject({ server_broken: true }) }
 		} else {
 			resolve({ form: this.data.form, errors: this.errors })
 		}

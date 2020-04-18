@@ -41,3 +41,8 @@ exports.home = (req, res) => {
 		res.render('home-dashboard')
 	}
 }
+
+// 404
+exports.render_404 = function(req, res) {
+	res.render('404')
+}
